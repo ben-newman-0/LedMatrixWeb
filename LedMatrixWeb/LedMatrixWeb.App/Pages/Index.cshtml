@@ -1,0 +1,32 @@
+﻿@page "/"
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<div style="width: 40px; height: 40px; background-color: rgb(@pickerRed, @pickerGreen, @pickerBlue);"></div>
+
+<input type="range" min="0" max="255" bind="@pickerRed" />
+<input type="range" min="0" max="255" bind="@pickerGreen" />
+<input type="range" min="0" max="255" bind="@pickerBlue" />
+
+<table>
+    <tbody>
+        @for (int row = 0; row < 32; row++)
+        {
+            <tr>
+                @for (int col = 0; col < 32; col++)
+                {
+                    <PixelCell bind-pickerRed="@pickerRed" bind-pickerGreen="@pickerGreen" bind-pickerBlue="@pickerBlue"></PixelCell>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+@functions
+{
+    private int pickerRed;
+    private int pickerGreen;
+    private int pickerBlue;
+}
