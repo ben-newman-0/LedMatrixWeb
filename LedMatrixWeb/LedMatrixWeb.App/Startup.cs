@@ -1,3 +1,4 @@
+using LedMatrixWeb.App.Services;
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -7,6 +8,8 @@ namespace LedMatrixWeb.App
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddSingleton<LedMatrixService>();
+            services.AddHostedService<LedMatrixService>();
         }
 
         public void Configure(IComponentsApplicationBuilder app)
