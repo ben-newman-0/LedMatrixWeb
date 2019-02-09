@@ -1,10 +1,13 @@
 ﻿@page "/"
+@inject LedMatrixWeb.App.Services.LedMatrixService MatrixService
 
 <div style="width: 40px; height: 40px; background-color: rgb(@pickerRed, @pickerGreen, @pickerBlue);"></div>
 
 <input type="range" min="0" max="255" bind="@pickerRed" />
 <input type="range" min="0" max="255" bind="@pickerGreen" />
 <input type="range" min="0" max="255" bind="@pickerBlue" />
+
+<input type="range" min="0" max="100" bind="@brightness" onclick="@OnBrightnessChange" />
 
 <table style="border-spacing: 0px;">
     <tbody>
@@ -25,4 +28,12 @@
     private int pickerRed;
     private int pickerGreen;
     private int pickerBlue;
+
+    private int brightness;
+
+    void OnBrightnessChange()
+    {
+        Console.WriteLine("Setting brightness to " + brightness);
+        MatrixService.SetBrightness(brightness);
+    }
 }
