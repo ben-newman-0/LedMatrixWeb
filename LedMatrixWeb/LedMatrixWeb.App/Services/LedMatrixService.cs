@@ -10,13 +10,18 @@ namespace LedMatrixWeb.App.Services
     {
         private Color[,] pixels = new Color[32, 32];
 
+        public void SetPixel(int x, int y, Color color)
+        {
+            pixels[x, y] = color;
+        }
+
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             for (var row = 0; row < 32; row++)
             {
                 for (var col = 0; col < 32; col++)
                 {
-                    pixels[col, row] = new Color(255, 255, 255);
+                    pixels[col, row] = new Color(1, 1, 1);
                 }
             }
 
@@ -48,7 +53,6 @@ namespace LedMatrixWeb.App.Services
 
                 canvas = matrix.SwapOnVsync(canvas);
 
-                Console.Write(".");
                 await Task.Delay(1);
             } while (stoppingToken.IsCancellationRequested == false);
         }

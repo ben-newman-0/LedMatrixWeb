@@ -13,7 +13,7 @@
             <tr>
                 @for (int col = 0; col < 32; col++)
                 {
-                    <PixelCell bind-pickerRed="@pickerRed" bind-pickerGreen="@pickerGreen" bind-pickerBlue="@pickerBlue"></PixelCell>
+                    <PixelCell bind-pickerRed="@pickerRed" bind-pickerGreen="@pickerGreen" bind-pickerBlue="@pickerBlue" bind-x="@col" bind-y="@row"></PixelCell>
                 }
             </tr>
         }

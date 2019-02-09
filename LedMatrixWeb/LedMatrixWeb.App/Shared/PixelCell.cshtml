@@ -21,6 +21,18 @@
     [Parameter]
     private Action<int> pickerBlueChanged { get; set; }
 
+    [Parameter]
+    private int x {get; set;}
+
+    [Parameter]
+    private Action<int> xChanged { get; set; }
+
+    [Parameter]
+    private int y {get; set;}
+
+    [Parameter]
+    private Action<int> yChanged { get; set; }
+
     private int red;
     private int green;
     private int blue;
@@ -30,5 +42,7 @@
         red = pickerRed;
         green = pickerGreen;
         blue = pickerBlue;
+
+        MatrixService.SetPixel(x, y, new rpi_rgb_led_matrix_sharp.Color(red, green, blue));
     }
 }
