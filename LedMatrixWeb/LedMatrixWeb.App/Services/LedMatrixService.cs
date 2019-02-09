@@ -8,6 +8,8 @@ namespace LedMatrixWeb.App.Services
 {
     class LedMatrixService : BackgroundService
     {
+        public int X { get; set; }
+
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             var options = new RGBLedMatrixOptions
@@ -24,18 +26,17 @@ namespace LedMatrixWeb.App.Services
             var matrix = new RGBLedMatrix(options);
             var canvas = matrix.CreateOffscreenCanvas();
 
-            var keepRunning = true;
-
             do
             {
                 canvas.Clear();
 
-                canvas.SetPixel(5, 5, new Color(254, 254, 254));
+                canvas.SetPixel(X, 5, new Color(254, 254, 254));
 
                 canvas = matrix.SwapOnVsync(canvas);
 
+                Console.Write(X + " ");
                 await Task.Delay(1);
-            } while (stoppingToken.IsCancellationRequested);
+            } while (stoppingToken.IsCancellationRequested == false);
 
             //x = 2;
 

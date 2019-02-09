@@ -1,4 +1,5 @@
-﻿
+﻿@inject LedMatrixWeb.App.Services.LedMatrixService MatrixService
+
 <td style="width: 20px; height: 20px; border: 1px solid #666; background-color: rgb(@red, @green, @blue);" onclick="@OnPixelClick"></td>
 
 @functions{
@@ -29,5 +30,7 @@
         red = pickerRed;
         green = pickerGreen;
         blue = pickerBlue;
+
+        MatrixService.X = MatrixService.X + 1;
     }
 }

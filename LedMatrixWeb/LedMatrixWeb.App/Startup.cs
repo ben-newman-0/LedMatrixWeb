@@ -8,8 +8,8 @@ namespace LedMatrixWeb.App
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddSingleton<LedMatrixService>();
-            services.AddHostedService<LedMatrixService>();
+            services.AddSingleton<LedMatrixService>();
+            services.AddHostedService<BackgroundServiceStarter<LedMatrixService>>();
         }
 
         public void Configure(IComponentsApplicationBuilder app)
