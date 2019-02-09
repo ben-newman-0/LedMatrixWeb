@@ -8,10 +8,18 @@ namespace LedMatrixWeb.App.Services
 {
     class LedMatrixService : BackgroundService
     {
-        public int X { get; set; }
+        private Color[,] pixels = new Color[32, 32];
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            for (var row = 0; row < 32; row++)
+            {
+                for (var col = 0; col < 32; col++)
+                {
+                    pixels[col, row] = new Color(255, 255, 255);
+                }
+            }
+
             var options = new RGBLedMatrixOptions
             {
                 Cols = 32,
@@ -30,40 +38,19 @@ namespace LedMatrixWeb.App.Services
             {
                 canvas.Clear();
 
-                canvas.SetPixel(X, 5, new Color(254, 254, 254));
+                for(var row = 0; row < 32; row++)
+                {
+                    for(var col = 0; col < 32; col++)
+                    {
+                        canvas.SetPixel(col, row, pixels[col, row]);
+                    }
+                }
 
                 canvas = matrix.SwapOnVsync(canvas);
 
-                Console.Write(X + " ");
+                Console.Write(".");
                 await Task.Delay(1);
             } while (stoppingToken.IsCancellationRequested == false);
-
-            //x = 2;
-
-            //var options = new RGBLedMatrixOptions
-            //{
-            //    Cols = 32,
-            //    Rows = 16,
-            //    ChainLength = 2,
-            //    PixelMapperConfig = "BottomToTop-Mapper",
-            //    DisableHardwarePulsing = true,
-            //    HardwareMapping = "adafruit-hat",
-            //    Brightness = 25
-            //};
-
-            //var matrix = new RGBLedMatrix(options);
-            //var canvas = matrix.CreateOffscreenCanvas();
-
-            //while (!stoppingToken.IsCancellationRequested)
-            //{
-            //    canvas.Clear();
-
-            //    canvas.SetPixel(2, 2, new Color(255, 255, 255));
-
-            //    canvas = matrix.SwapOnVsync(canvas);
-
-            //    await Task.Delay(1);
-            //}
         }
     }
 }
